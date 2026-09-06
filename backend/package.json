@@ -15,6 +15,7 @@
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",
     "lint": "oxlint src/ test/",
+    "compodoc": "npx compodoc -p tsconfig.json -d documentation -s --port 8081",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
