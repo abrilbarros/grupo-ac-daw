@@ -23,9 +23,7 @@ async function bootstrap() {
   if (process.env.SWAGGER_ENABLED === 'true') {
     const config = new DocumentBuilder()
       .setTitle('Sistema de Turnos - Clinica')
-      .setDescription(
-        'Descripción de la API del sistema de gestión de proyectos',
-      )
+      .setDescription('API del Sistema de gestion de turnos medicos')
       .addBearerAuth()
       .build();
     const document = SwaggerModule.createDocument(app, config);

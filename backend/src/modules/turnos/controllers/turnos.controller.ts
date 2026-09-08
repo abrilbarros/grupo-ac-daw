@@ -16,19 +16,19 @@ import { ListReservaDto } from '../dtos/output/list-reserva.dto.js';
 export class TurnosController {
   @ApiBearerAuth()
   @Post()
-  async crear(@Body() dto: CreateReservaDto): Promise<{ id: number }> {
+  async crearReserva(@Body() dto: CreateReservaDto): Promise<{ id: number }> {
     throw new NotImplementedException();
   }
 
   @ApiBearerAuth()
   @Get()
-  async listar(): Promise<ListReservaDto[]> {
+  async listarReservas(): Promise<ListReservaDto[]> {
     throw new NotImplementedException();
   }
 
   @ApiBearerAuth()
   @Put(':id/cancelar')
-  async cancelar(@Param('id') id: string): Promise<void> {
+  async cancelarReserva(@Param('id') id: string): Promise<void> {
     throw new NotImplementedException();
   }
 
