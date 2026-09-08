@@ -1,1 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --color-primario: #327b9e;
+    --color-primario-hover: #286481;
+    --color-acento: #69b7b9;
+    --color-texto: #142b3c;
+    --color-texto-secundario: #53677e;
+    --color-fondo: #f4f9fc;
+    --color-borde: #cbd5e1;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+button,
+input {
+    font: inherit;
+}
+
+.boton-primario {
+    transition: background-color 0.2s;
+    padding: 14px;
+    background-color: var(--color-primario);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.boton-primario:hover {
+    background-color: var(--color-primario-hover);
+}
+
+.boton-primario:focus-visible {
+    outline: 3px solid var(--color-texto);
+    outline-offset: 3px;
+}
+
+.campo-formulario {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-borde);
+    border-radius: 8px;
+}
+
+.campo-formulario:focus {
+    border-color: var(--color-primario);
+    outline: 2px solid var(--color-primario);
+    outline-offset: 2px;
+}

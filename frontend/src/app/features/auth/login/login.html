@@ -1,0 +1,46 @@
+<div class="pagina-login">
+    <section class="presentacion">
+        <img src="logo.svg" alt="Clínica Nova" width="220">
+        <p class="lema">Tu salud, más cerca</p>
+        <h2>Cuidar tu salud también es <span>avanzar</span></h2>
+        <p>Un sistema simple y seguro para una mejor atención.</p>
+        <ul class="beneficios">
+            <li>Turnos más simples</li>
+            <li>Profesionales cerca tuyo</li>
+            <li>Una atención más humana</li>
+        </ul>
+    </section>
+    <main class="login">
+        <p class="nombre-clinica">Clínica Nova</p>
+        <h1>Bienvenido/a</h1>
+        <p>Ingresá tus datos para acceder al sistema.</p>
+        <form (submit)="$event.preventDefault()">
+            <div>
+                <label for="usuario">Usuario o email</label>
+                <input class="campo-formulario" id="usuario" name="usuario" type="text" autocomplete="username" required
+                    placeholder="Tu usuario o email">
+            </div>
+
+            <div>
+                <label for="contrasena">Contraseña</label>
+                <input class="campo-formulario" id="contrasena" name="contrasena"
+                    [type]="mostrarContrasena ? 'text' : 'password'" autocomplete="current-password" required
+                    placeholder="Tu contraseña">
+                <button type="button" class="mostrar-contrasena" (click)="mostrarContrasena = !mostrarContrasena"
+                    aria-controls="contrasena">
+                    {{ mostrarContrasena ? 'Ocultar contraseña' : 'Mostrar contraseña' }}
+                </button>
+            </div>
+            <div class="opciones-login">
+                <label class="recordar">
+                    <input type="checkbox" name="recordar">
+                    Recordar mi sesión
+                </label>
+
+                <p class="recuperar">¿Olvidaste tu contraseña?</p>
+            </div>
+            <button type="submit" class="boton-primario">Iniciar sesión</button>
+        </form>
+        <p class="mensaje-seguridad">Acceso seguro y confidencial</p>
+    </main>
+</div>
