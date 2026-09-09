@@ -14,18 +14,20 @@
         <p class="nombre-clinica">Clínica Nova</p>
         <h1>Bienvenido/a</h1>
         <p>Ingresá tus datos para acceder al sistema.</p>
-        <form (submit)="$event.preventDefault()">
+        <form ngNativeValidate (ngSubmit)="iniciarSesion()">
             <div>
-                <label for="usuario">Usuario o email</label>
+                <label for="usuario">Documento o email</label>
                 <input class="campo-formulario" id="usuario" name="usuario" type="text" autocomplete="username" required
-                    placeholder="Tu usuario o email">
+                    placeholder="Tu documento o email" [(ngModel)]="usuario" [readonly]="cargando()"
+                    (input)="mensaje.set(''); hayError.set(false)">
             </div>
 
             <div>
                 <label for="contrasena">Contraseña</label>
                 <input class="campo-formulario" id="contrasena" name="contrasena"
                     [type]="mostrarContrasena ? 'text' : 'password'" autocomplete="current-password" required
-                    placeholder="Tu contraseña">
+                    placeholder="Tu contraseña" [(ngModel)]="contrasena" [readonly]="cargando()"
+                    (input)="mensaje.set(''); hayError.set(false)">
                 <button type="button" class="mostrar-contrasena" (click)="mostrarContrasena = !mostrarContrasena"
                     aria-controls="contrasena">
                     {{ mostrarContrasena ? 'Ocultar contraseña' : 'Mostrar contraseña' }}
@@ -39,7 +41,12 @@
 
                 <p class="recuperar">¿Olvidaste tu contraseña?</p>
             </div>
-            <button type="submit" class="boton-primario">Iniciar sesión</button>
+            <button type="submit" class="boton-primario" [disabled]="cargando()">
+                {{ cargando() ? 'Ingresando...' : 'Iniciar sesión' }}
+            </button>
+            <p class="mensaje-login" [class.mensaje-error]="hayError()" role="status">
+                {{ mensaje() }}
+            </p>
         </form>
         <p class="mensaje-seguridad">Acceso seguro y confidencial</p>
     </main>

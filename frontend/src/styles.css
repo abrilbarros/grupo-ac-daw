@@ -6,7 +6,9 @@
     --color-texto: #142b3c;
     --color-texto-secundario: #53677e;
     --color-fondo: #f4f9fc;
+    --color-superficie: #ffffff;
     --color-borde: #cbd5e1;
+    --color-error: #b42318;
 }
 
 * {
@@ -50,10 +52,23 @@ input {
     padding: 12px;
     border: 1px solid var(--color-borde);
     border-radius: 8px;
+    color: var(--color-texto);
+    background-color: var(--color-superficie);
 }
 
 .campo-formulario:focus {
     border-color: var(--color-primario);
     outline: 2px solid var(--color-primario);
     outline-offset: 2px;
+}
+
+.campo-formulario::placeholder {
+    color: var(--color-texto-secundario);
+    opacity: 1;
+}
+
+.boton-primario:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    background-color: var(--color-primario);
 }

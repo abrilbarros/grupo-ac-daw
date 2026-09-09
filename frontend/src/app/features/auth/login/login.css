@@ -5,7 +5,7 @@
     max-width: 480px;
     margin: 0;
     padding: 32px;
-    background-color: white;
+    background-color: var(--color-superficie);
     border-radius: 20px;
     box-shadow: 0 8px 30px rgba(20, 43, 60, 0.08);
 }
@@ -66,6 +66,7 @@ h1+p {
     margin-bottom: 0;
     color: var(--color-texto-secundario);
     font-size: 14px;
+    cursor: pointer;
 }
 
 .recuperar {
@@ -145,6 +146,36 @@ h1+p {
 
 .recordar input {
     accent-color: var(--color-primario);
+}
+
+.mostrar-contrasena {
+    margin-top: 8px;
+    padding: 6px 0;
+    background: none;
+    border: none;
+    color: var(--color-primario);
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.mostrar-contrasena:hover {
+    text-decoration: underline;
+}
+
+.mostrar-contrasena:focus-visible {
+    outline: 2px solid var(--color-primario);
+    outline-offset: 3px;
+}
+
+.mensaje-login {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--color-texto);
+}
+
+.mensaje-error {
+    color: var(--color-error);
 }
 
 @media (max-width: 800px) {

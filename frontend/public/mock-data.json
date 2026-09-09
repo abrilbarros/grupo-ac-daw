@@ -7,7 +7,7 @@
   "_notas": "Fecha de referencia: 2026-09-03. Horario atencion 08-16, turnos de 1h. valor_consulta en reservas queda congelado al momento de reservar.",
 
   "usuarios": [
-    { "id": 1, "documento": "30111222", "apellidos": "Gomez", "nombres": "Laura", "email": "laura.gomez@clinica.com", "clave": "$2b$10$hashLauraGomez", "estado": "ACTIVO", "rol": "MEDICO" },
+    { "id": 1, "documento": "30111222", "apellidos": "Gomez", "nombres": "Laura", "email": "laura.gomez@clinica.com", "clave": "prueba123", "estado": "ACTIVO", "rol": "MEDICO" },
     { "id": 2, "documento": "28999888", "apellidos": "Fernandez", "nombres": "Diego", "email": "diego.fernandez@clinica.com", "clave": "$2b$10$hashDiegoFdez", "estado": "ACTIVO", "rol": "MEDICO" },
     { "id": 3, "documento": "33444555", "apellidos": "Ruiz", "nombres": "Marina", "email": "marina.ruiz@clinica.com", "clave": "$2b$10$hashMarinaRuiz", "estado": "ACTIVO", "rol": "MEDICO" },
     { "id": 4, "documento": "35666777", "apellidos": "Perez", "nombres": "Juan", "email": "juan.perez@mail.com", "clave": "$2b$10$hashJuanPerez", "estado": "ACTIVO", "rol": "PACIENTE" },
