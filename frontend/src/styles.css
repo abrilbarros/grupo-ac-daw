@@ -1,4 +1,3 @@
-/* You can add global styles to this file, and also import other style files */
 :root {
     --color-primario: #327b9e;
     --color-primario-hover: #286481;
@@ -47,6 +46,12 @@ input {
     outline-offset: 3px;
 }
 
+.boton-primario:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    background-color: var(--color-primario);
+}
+
 .campo-formulario {
     width: 100%;
     padding: 12px;
@@ -65,10 +70,4 @@ input {
 .campo-formulario::placeholder {
     color: var(--color-texto-secundario);
     opacity: 1;
-}
-
-.boton-primario:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-    background-color: var(--color-primario);
 }

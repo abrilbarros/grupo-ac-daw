@@ -1,0 +1,22 @@
+<main class="inicio">
+    @if (auth.sesion(); as usuario) {
+    <h1>Hola, {{ usuario.nombres }}</h1>
+    <p>Tu rol es: {{ nombresRoles[usuario.rol] }}</p>
+    @switch (usuario.rol) {
+    @case ('MEDICO') {
+    <p>Desde acá podrás consultar tus turnos y registrar la atención.</p>
+    }
+    @case ('PACIENTE') {
+    <p>Desde acá podrás reservar, consultar y cancelar tus turnos.</p>
+    }
+    @case ('ADMINISTRADOR') {
+    <p>Desde acá podrás gestionar turnos y modificar el valor de las consultas.</p>
+    }
+    }
+    <button type="button" class="boton-primario" (click)="cerrarSesion()">
+        Cerrar sesión
+    </button>
+    } @else {
+    <p>No hay una sesión iniciada.</p>
+    }
+</main>

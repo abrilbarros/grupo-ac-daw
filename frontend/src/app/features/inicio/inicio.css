@@ -1,0 +1,18 @@
+.inicio {
+    width: 90%;
+    max-width: 600px;
+    margin: 48px auto;
+    padding: 32px;
+    background-color: var(--color-superficie);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(20, 43, 60, 0.08);
+}
+
+.inicio h1 {
+    margin-top: 0;
+}
+
+.inicio p {
+    color: var(--color-texto-secundario);
+    margin-bottom: 24px;
+}

@@ -1,16 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Auth } from '../../../core/services/auth';
 
-interface UsuarioPrueba {
-  id: number;
-  documento: string;
-  email: string;
-  clave: string;
-  nombres: string;
-  estado: 'ACTIVO' | 'BAJA';
-  rol: 'MEDICO' | 'PACIENTE' | 'ADMINISTRADOR';
-}
 @Component({
   selector: 'app-login',
   imports: [FormsModule],
@@ -18,13 +10,21 @@ interface UsuarioPrueba {
   styleUrl: './login.css',
 })
 export class Login {
-  private http = inject(HttpClient);
+  private auth = inject(Auth);
+  private router = inject(Router);
   mostrarContrasena = false;
   usuario = '';
   contrasena = '';
+  recordarSesion = false;
   mensaje = signal('');
   cargando = signal(false);
   hayError = signal(false);
+
+  limpiarMensaje() {
+    this.mensaje.set('');
+    this.hayError.set(false);
+  }
+
   iniciarSesion() {
     if (!this.usuario.trim() || !this.contrasena) {
       this.hayError.set(true);
@@ -39,7 +39,7 @@ export class Login {
     this.cargando.set(true);
     this.mensaje.set('Cargando datos...');
 
-    this.http.get<{ usuarios: UsuarioPrueba[] }>('/mock-data.json')
+    this.auth.obtenerUsuarios()
       .subscribe({
         next: (datos) => {
           this.cargando.set(false);
@@ -63,9 +63,8 @@ export class Login {
             return;
           }
 
-          this.mensaje.set(
-            `Bienvenido/a, ${usuarioEncontrado.nombres}. Acceso de prueba correcto.`
-          );
+          this.auth.guardarSesion(usuarioEncontrado);
+          this.router.navigate(['/inicio']);
         },
         error: () => {
           this.cargando.set(false);

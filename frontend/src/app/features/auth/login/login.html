@@ -1,7 +1,12 @@
 <div class="pagina-login">
     <section class="presentacion">
-        <img src="logo.svg" alt="Clínica Nova" width="220">
-        <p class="lema">Tu salud, más cerca</p>
+        <div class="marca">
+            <img src="logo.svg" alt="" width="80">
+            <div>
+                <p class="marca-nombre">Clínica <span>Vita</span></p>
+                <p class="lema">Tu salud, más cerca</p>
+            </div>
+        </div>
         <h2>Cuidar tu salud también es <span>avanzar</span></h2>
         <p>Un sistema simple y seguro para una mejor atención.</p>
         <ul class="beneficios">
@@ -11,7 +16,7 @@
         </ul>
     </section>
     <main class="login">
-        <p class="nombre-clinica">Clínica Nova</p>
+        <p class="nombre-clinica">Clínica Vita</p>
         <h1>Bienvenido/a</h1>
         <p>Ingresá tus datos para acceder al sistema.</p>
         <form ngNativeValidate (ngSubmit)="iniciarSesion()">
@@ -19,7 +24,7 @@
                 <label for="usuario">Documento o email</label>
                 <input class="campo-formulario" id="usuario" name="usuario" type="text" autocomplete="username" required
                     placeholder="Tu documento o email" [(ngModel)]="usuario" [readonly]="cargando()"
-                    (input)="mensaje.set(''); hayError.set(false)">
+                    (input)="limpiarMensaje()">
             </div>
 
             <div>
@@ -27,7 +32,7 @@
                 <input class="campo-formulario" id="contrasena" name="contrasena"
                     [type]="mostrarContrasena ? 'text' : 'password'" autocomplete="current-password" required
                     placeholder="Tu contraseña" [(ngModel)]="contrasena" [readonly]="cargando()"
-                    (input)="mensaje.set(''); hayError.set(false)">
+                    (input)="limpiarMensaje()">
                 <button type="button" class="mostrar-contrasena" (click)="mostrarContrasena = !mostrarContrasena"
                     aria-controls="contrasena">
                     {{ mostrarContrasena ? 'Ocultar contraseña' : 'Mostrar contraseña' }}
@@ -35,7 +40,7 @@
             </div>
             <div class="opciones-login">
                 <label class="recordar">
-                    <input type="checkbox" name="recordar">
+                    <input type="checkbox" name="recordar" [(ngModel)]="recordarSesion">
                     Recordar mi sesión
                 </label>
 
