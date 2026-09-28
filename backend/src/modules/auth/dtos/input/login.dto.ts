@@ -4,8 +4,8 @@ import { ApiProperty } from '@nestjs/swagger';
 export class LoginDto {
   @ApiProperty()
   @IsString()
-  @IsNotEmpty({ message: 'Se debe indicar el nombre' })
-  nombre!: string;
+  @IsNotEmpty({ message: 'Se debe indicar el documento' })
+  documento!: string;
 
   @ApiProperty()
   @IsString()

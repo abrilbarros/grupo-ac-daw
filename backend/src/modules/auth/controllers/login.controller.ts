@@ -1,15 +1,15 @@
-import {
-  Body,
-  Controller,
-  NotImplementedException,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiOkResponse } from '@nestjs/swagger';
 import { LoginDto } from '../dtos/input/login.dto.js';
+import { AuthService } from '../services/auth.service.js';
 
 @Controller('/auth')
 export class LoginController {
+  constructor(private readonly service: AuthService) {}
+
   @Post('login')
-  async login(@Body() loginDto: LoginDto): Promise<{ accessToken: string }> {
-    throw new NotImplementedException();
+  @ApiOkResponse({ description: 'Devuelve el accessToken (JWT)' })
+  async login(@Body() dto: LoginDto): Promise<{ accessToken: string }> {
+    return await this.service.login(dto);
   }
 }
