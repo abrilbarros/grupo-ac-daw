@@ -32,6 +32,10 @@ export class TurnosService {
     const idPaciente =
       usuario.rol === RolUsuario.PACIENTE ? usuario.sub : dto.idPaciente;
 
+    if (!idPaciente) {
+      throw new BadRequestException('Debe indicar el paciente');
+    }
+
     const fechaHora = new Date(dto.fechaHora);
     this.validarFechaHora(fechaHora);
 
