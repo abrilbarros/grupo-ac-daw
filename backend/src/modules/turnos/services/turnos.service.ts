@@ -186,6 +186,19 @@ export class TurnosService {
     await this.repository.save(reserva);
   }
 
+  async actualizarValorConsulta(
+    idMedico: number,
+    valorConsulta: number,
+  ): Promise<void> {
+    const medico = await this.medicoRepository.findOneBy({ id: idMedico });
+    if (!medico) {
+      throw new BadRequestException('Médico no encontrado');
+    }
+
+    medico.valorConsulta = valorConsulta;
+    await this.medicoRepository.save(medico);
+  }
+
   private validarFechaHora(fechaHora: Date): void {
     if (Number.isNaN(fechaHora.getTime())) {
       throw new BadRequestException('Fecha y hora inválidas');

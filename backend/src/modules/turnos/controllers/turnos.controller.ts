@@ -2,7 +2,6 @@ import {
   Body,
   Controller,
   Get,
-  NotImplementedException,
   Param,
   ParseIntPipe,
   Post,
@@ -77,9 +76,9 @@ export class TurnosController {
   @Roles(RolUsuario.ADMINISTRADOR)
   @Put('valor-consulta/:idMedico')
   async actualizarValorConsulta(
-    @Param('idMedico') idMedico: string,
+    @Param('idMedico', ParseIntPipe) idMedico: number,
     @Body() dto: ActualizarValorConsultaDto,
   ): Promise<void> {
-    throw new NotImplementedException();
+    await this.service.actualizarValorConsulta(idMedico, dto.valorConsulta);
   }
 }
