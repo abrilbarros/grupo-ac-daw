@@ -3,3 +3,4 @@ node_modules/
 dist/
 documentation/
 install-log.txt
+tsconfig.build.tsbuildinfo
