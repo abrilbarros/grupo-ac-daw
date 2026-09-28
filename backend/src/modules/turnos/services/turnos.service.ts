@@ -115,11 +115,75 @@ export class TurnosService {
     return reservas.map((r) => {
       const dto = new ListReservaDto();
       dto.id = r.id;
-      dto.fechaHora = r.fechaHora.toISOString();
+      dto.fechaHora = r.fechaHora.toLocaleString('sv-SE').replace(' ', 'T');
       dto.estado = r.estado;
       dto.valorConsulta = r.valorConsulta;
       return dto;
     });
+  }
+
+  async cancelarReserva(
+    id: number,
+    usuario: { sub: number; rol: RolUsuario },
+  ): Promise<void> {
+    const reserva = await this.repository.findOneBy({ id });
+
+    if (
+      !reserva ||
+      (usuario.rol === RolUsuario.PACIENTE &&
+        reserva.idPaciente !== usuario.sub)
+    ) {
+      throw new BadRequestException('Reserva no encontrada');
+    }
+
+    if (reserva.estado !== EstadosReserva.ACTIVO) {
+      throw new BadRequestException('Solo se pueden cancelar reservas activas');
+    }
+
+    const ahora = new Date();
+
+    if (usuario.rol === RolUsuario.PACIENTE) {
+      const inicioDelDia = new Date(reserva.fechaHora);
+      inicioDelDia.setHours(0, 0, 0, 0);
+      if (ahora >= inicioDelDia) {
+        throw new BadRequestException(
+          'Solo se puede cancelar hasta el día anterior a la consulta',
+        );
+      }
+    } else if (ahora >= reserva.fechaHora) {
+      throw new BadRequestException('La consulta ya comenzó');
+    }
+
+    reserva.estado = EstadosReserva.CANCELADO;
+    await this.repository.save(reserva);
+  }
+
+  async marcarReserva(
+    id: number,
+    usuario: { sub: number; rol: RolUsuario },
+    nuevoEstado: EstadosReserva.ATENDIDO | EstadosReserva.AUSENTE,
+  ): Promise<void> {
+    const medico = await this.medicoRepository.findOneBy({
+      idUsuario: usuario.sub,
+    });
+    if (!medico) {
+      throw new BadRequestException('Médico no encontrado');
+    }
+
+    const reserva = await this.repository.findOneBy({
+      id,
+      idMedico: medico.id,
+    });
+    if (!reserva) {
+      throw new BadRequestException('Reserva no encontrada');
+    }
+
+    if (reserva.estado !== EstadosReserva.ACTIVO) {
+      throw new BadRequestException('Solo se pueden marcar reservas activas');
+    }
+
+    reserva.estado = nuevoEstado;
+    await this.repository.save(reserva);
   }
 
   private validarFechaHora(fechaHora: Date): void {
