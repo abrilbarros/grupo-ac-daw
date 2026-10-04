@@ -17,7 +17,7 @@ const estilos = `
 .swagger-ui .opblock .opblock-summary { padding: 16px 18px; }
 .swagger-ui .opblock .opblock-summary-method { border-radius: 8px; min-width: 95px; font-size: 16px; padding: 9px 0; }
 .swagger-ui .opblock .opblock-summary-path { font-size: 18px; font-weight: 600; }
-.swagger-ui .opblock .opblock-summary-description { font-size: 15px; }
+.swagger-ui .opblock .opblock-summary-description { flex: 1 1 auto; text-align: right !important; padding-right: 18px; font-size: 15px; font-weight: 600; color: #334155; }
 .swagger-ui .btn.execute { background-color: #0e7490; border-color: #0e7490; font-size: 16px; padding: 10px 28px; border-radius: 8px; }
 `;
 

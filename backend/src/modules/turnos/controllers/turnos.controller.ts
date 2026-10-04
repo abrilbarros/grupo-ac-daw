@@ -10,7 +10,12 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { ApiBearerAuth, ApiOkResponse, ApiQuery } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOkResponse,
+  ApiOperation,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { CreateReservaDto } from '../dtos/input/create-reserva.dto.js';
 import { ActualizarValorConsultaDto } from '../dtos/input/actualizar-valor-consulta.dto.js';
 import { ListReservaDto } from '../dtos/output/list-reserva.dto.js';
@@ -27,6 +32,7 @@ import { RolUsuario } from '../../usuarios/enums/rol-usuario.enum.js';
 export class TurnosController {
   constructor(private readonly service: TurnosService) {}
 
+  @ApiOperation({ summary: 'Paciente y administrador - Reservar turno' })
   @Roles(RolUsuario.PACIENTE, RolUsuario.ADMINISTRADOR)
   @Post()
   async crearReserva(
@@ -36,6 +42,7 @@ export class TurnosController {
     return await this.service.crearReserva(dto, req.usuario);
   }
 
+  @ApiOperation({ summary: 'Todos los roles - Listar turnos' })
   @ApiOkResponse({ type: ListReservaDto, isArray: true })
   @ApiQuery({ name: 'fecha', required: false, example: '2026-10-05' })
   @Get()
@@ -46,6 +53,7 @@ export class TurnosController {
     return await this.service.listarReservas(req.usuario, fecha);
   }
 
+  @ApiOperation({ summary: 'Paciente y administrador - Cancelar turno' })
   @Roles(RolUsuario.PACIENTE, RolUsuario.ADMINISTRADOR)
   @Put(':id/cancelar')
   async cancelarReserva(
@@ -55,6 +63,7 @@ export class TurnosController {
     await this.service.cancelarReserva(id, req.usuario);
   }
 
+  @ApiOperation({ summary: 'Médico - Marcar turno como atendido' })
   @Roles(RolUsuario.MEDICO)
   @Put(':id/atendido')
   async marcarAtendido(
@@ -64,6 +73,7 @@ export class TurnosController {
     await this.service.marcarReserva(id, req.usuario, EstadosReserva.ATENDIDO);
   }
 
+  @ApiOperation({ summary: 'Médico - Marcar turno como ausente' })
   @Roles(RolUsuario.MEDICO)
   @Put(':id/ausente')
   async marcarAusente(
@@ -73,6 +83,7 @@ export class TurnosController {
     await this.service.marcarReserva(id, req.usuario, EstadosReserva.AUSENTE);
   }
 
+  @ApiOperation({ summary: 'Administrador - Modificar valor de consulta' })
   @Roles(RolUsuario.ADMINISTRADOR)
   @Put('valor-consulta/:idMedico')
   async actualizarValorConsulta(

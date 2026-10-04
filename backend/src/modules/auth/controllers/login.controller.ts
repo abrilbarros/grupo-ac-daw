@@ -1,5 +1,5 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { ApiOkResponse } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOperation } from '@nestjs/swagger';
 import { LoginDto } from '../dtos/input/login.dto.js';
 import { AuthService } from '../services/auth.service.js';
 
@@ -7,8 +7,9 @@ import { AuthService } from '../services/auth.service.js';
 export class LoginController {
   constructor(private readonly service: AuthService) {}
 
+  @ApiOperation({ summary: 'Todos los roles - Iniciar sesión' })
+  @ApiCreatedResponse({ description: 'Devuelve el accessToken (JWT)' })
   @Post('login')
-  @ApiOkResponse({ description: 'Devuelve el accessToken (JWT)' })
   async login(@Body() dto: LoginDto): Promise<{ accessToken: string }> {
     return await this.service.login(dto);
   }
