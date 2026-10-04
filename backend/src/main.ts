@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import helmet from 'helmet';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { configurarSwagger } from './config/swagger.config.js';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,13 +21,7 @@ async function bootstrap() {
   );
 
   if (process.env.SWAGGER_ENABLED === 'true') {
-    const config = new DocumentBuilder()
-      .setTitle('Sistema de Turnos - Clinica')
-      .setDescription('API del Sistema de gestion de turnos medicos')
-      .addBearerAuth()
-      .build();
-    const document = SwaggerModule.createDocument(app, config);
-    SwaggerModule.setup(globalPrefix, app, document);
+    configurarSwagger(app, globalPrefix);
   }
 
   await app.listen(process.env.PORT ?? 3000);
