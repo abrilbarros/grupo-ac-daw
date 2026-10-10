@@ -1,5 +1,5 @@
-import { IsInt, IsNotEmpty, IsDateString } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+import { IsInt, IsNotEmpty, IsDateString, IsOptional } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 
 export class CreateReservaDto {
   @ApiProperty()
@@ -7,10 +7,10 @@ export class CreateReservaDto {
   @IsNotEmpty()
   idMedico!: number;
 
-  @ApiProperty()
+  @ApiPropertyOptional({ description: 'Solo lo envía el administrador' })
+  @IsOptional()
   @IsInt()
-  @IsNotEmpty()
-  idPaciente!: number;
+  idPaciente?: number;
 
   @ApiProperty()
   @IsDateString()

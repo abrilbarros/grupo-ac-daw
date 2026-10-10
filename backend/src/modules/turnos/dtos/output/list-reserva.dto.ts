@@ -13,4 +13,10 @@ export class ListReservaDto {
 
   @ApiProperty()
   valorConsulta!: number;
+
+  @ApiProperty()
+  medico!: string;
+
+  @ApiProperty()
+  paciente!: string;
 }

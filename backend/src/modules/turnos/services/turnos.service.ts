@@ -113,6 +113,7 @@ export class TurnosService {
 
     const reservas = await this.repository.find({
       where,
+      relations: { medico: { usuario: true }, paciente: true },
       order: { fechaHora: 'ASC' },
     });
 
@@ -122,6 +123,8 @@ export class TurnosService {
       dto.fechaHora = r.fechaHora.toLocaleString('sv-SE').replace(' ', 'T');
       dto.estado = r.estado;
       dto.valorConsulta = r.valorConsulta;
+      dto.medico = `${r.medico.usuario.apellidos}, ${r.medico.usuario.nombres}`;
+      dto.paciente = `${r.paciente.apellidos}, ${r.paciente.nombres}`;
       return dto;
     });
   }
