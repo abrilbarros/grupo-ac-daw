@@ -37,3 +37,15 @@ CREATE TABLE reservas (
         FOREIGN KEY (id_paciente)
         REFERENCES usuarios (id)
 );
+
+INSERT INTO usuarios (documento, apellidos, nombres, email, clave, estado, rol) VALUES
+('1000', 'Gomez', 'Laura', 'laura.gomez@clinica.com', '$2b$10$nkPUafFtZtZm3u2gZBBYuexAQ2FjeSgzS11zLYjHlV5XW3bPa2Whi', 'ACTIVO', 'ADMINISTRADOR'),
+('2000', 'Perez', 'Martin', 'martin.perez@clinica.com', '$2b$10$nkPUafFtZtZm3u2gZBBYuexAQ2FjeSgzS11zLYjHlV5XW3bPa2Whi', 'ACTIVO', 'MEDICO'),
+('2001', 'Lopez', 'Ana', 'ana.lopez@clinica.com', '$2b$10$nkPUafFtZtZm3u2gZBBYuexAQ2FjeSgzS11zLYjHlV5XW3bPa2Whi', 'ACTIVO', 'MEDICO'),
+('3000', 'Diaz', 'Sofia', 'sofia.diaz@mail.com', '$2b$10$nkPUafFtZtZm3u2gZBBYuexAQ2FjeSgzS11zLYjHlV5XW3bPa2Whi', 'ACTIVO', 'PACIENTE'),
+('3001', 'Romero', 'Juan', 'juan.romero@mail.com', '$2b$10$nkPUafFtZtZm3u2gZBBYuexAQ2FjeSgzS11zLYjHlV5XW3bPa2Whi', 'ACTIVO', 'PACIENTE'),
+('3002', 'Sosa', 'Lucia', 'lucia.sosa@mail.com', '$2b$10$nkPUafFtZtZm3u2gZBBYuexAQ2FjeSgzS11zLYjHlV5XW3bPa2Whi', 'ACTIVO', 'PACIENTE');
+
+INSERT INTO medicos (id_usuario, matricula, valor_consulta) VALUES
+(2, 12345, 15000),
+(3, 23456, 18000);
