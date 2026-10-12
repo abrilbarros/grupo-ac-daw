@@ -1,0 +1,56 @@
+<div class="pagina-login">
+    <section class="presentacion">
+        <div class="marca">
+            <img src="logo.svg" alt="">
+            <div>
+                <p class="marca-nombre">Clínica <span>Vita</span></p>
+                <p class="lema">Tu salud, más cerca</p>
+            </div>
+        </div>
+
+        <h2>Cuidar tu salud también es <span>avanzar</span></h2>
+        <p>Un sistema simple y seguro para una mejor atención.</p>
+
+        <ul class="beneficios">
+            <li>Turnos más simples</li>
+            <li>Profesionales cerca tuyo</li>
+            <li>Una atención más humana</li>
+        </ul>
+    </section>
+
+    <main class="login">
+        <p class="nombre-clinica">Clínica Vita</p>
+        <h1>Bienvenido/a</h1>
+        <p>Ingresá tus datos para acceder al sistema.</p>
+
+        <form [formGroup]="form" (ngSubmit)="iniciarSesion()">
+            <div class="grupo-campo">
+                <label for="documento">Documento</label>
+                <input pInputText id="documento" type="text" formControlName="documento" placeholder="Tu documento"
+                    autocomplete="username" [fluid]="true" />
+                @if (form.get('documento')?.touched &&
+                form.get('documento')?.hasError('required')) {
+                <p class="error-campo">
+                    Ingresá tu documento.
+                </p>
+                }
+            </div>
+
+            <div class="grupo-campo">
+                <label for="clave">Contraseña</label>
+                <p-password inputId="clave" formControlName="clave" [toggleMask]="true" [feedback]="false"
+                    autocomplete="current-password" placeholder="Tu contraseña" [fluid]="true" />
+                @if (form.get('clave')?.touched &&
+                form.get('clave')?.hasError('required')) {
+                <p class="error-campo">
+                    Ingresá tu contraseña.
+                </p>
+                }
+            </div>
+
+            <p-button label="Iniciar sesión" type="submit" [fluid]="true" />
+        </form>
+
+        <p class="mensaje-seguridad">Acceso seguro y confidencial</p>
+    </main>
+</div>
