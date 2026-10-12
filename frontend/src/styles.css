@@ -1,1 +1,50 @@
-/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import "@ng-select/ng-select/themes/default.theme.css";
+
+:root {
+    --color-primario: #327b9e;
+    --color-primario-hover: #286481;
+    --color-acento: #69b7b9;
+    --color-texto: #142b3c;
+    --color-texto-secundario: #53677e;
+    --color-fondo: #f4f9fc;
+    --color-superficie: #ffffff;
+    --color-borde: #cbd5e1;
+    --color-error: #b42318;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.p-dialog {
+    margin: 1rem;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+}
+
+.login .p-button {
+    background-color: var(--color-primario);
+    border-color: var(--color-primario);
+    color: var(--color-superficie);
+    font-weight: bold;
+}
+
+.login .p-button:not(:disabled):hover {
+    background-color: var(--color-primario-hover);
+    border-color: var(--color-primario-hover);
+    color: var(--color-superficie);
+}
+
+.login .p-button:not(:disabled):active {
+    background-color: var(--color-primario-hover);
+    border-color: var(--color-primario-hover);
+    color: var(--color-superficie);
+}
