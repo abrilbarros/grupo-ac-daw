@@ -12,6 +12,7 @@ import {
 } from '@nestjs/common';
 import {
   ApiBearerAuth,
+  ApiCreatedResponse,
   ApiOkResponse,
   ApiOperation,
   ApiQuery,
@@ -19,6 +20,7 @@ import {
 import { CreateReservaDto } from '../dtos/input/create-reserva.dto.js';
 import { ActualizarValorConsultaDto } from '../dtos/input/actualizar-valor-consulta.dto.js';
 import { ListReservaDto } from '../dtos/output/list-reserva.dto.js';
+import { ReservaCreadaDto } from '../dtos/output/reserva-creada.dto.js';
 import { TurnosService } from '../services/turnos.service.js';
 import { EstadosReserva } from '../enums/estados-reserva.enum.js';
 import { AuthGuard } from '../../auth/guards/auth.guard.js';
@@ -33,12 +35,13 @@ export class TurnosController {
   constructor(private readonly service: TurnosService) {}
 
   @ApiOperation({ summary: 'Paciente y administrador - Reservar turno' })
+  @ApiCreatedResponse({ type: ReservaCreadaDto })
   @Roles(RolUsuario.PACIENTE, RolUsuario.ADMINISTRADOR)
   @Post()
   async crearReserva(
     @Body() dto: CreateReservaDto,
     @Req() req: { usuario: { sub: number; rol: RolUsuario } },
-  ): Promise<{ id: number }> {
+  ): Promise<ReservaCreadaDto> {
     return await this.service.crearReserva(dto, req.usuario);
   }
 

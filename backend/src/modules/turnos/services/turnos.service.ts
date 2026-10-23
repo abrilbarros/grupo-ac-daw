@@ -9,6 +9,7 @@ import { EstadosReserva } from '../enums/estados-reserva.enum.js';
 import { RolUsuario } from '../../usuarios/enums/rol-usuario.enum.js';
 import { EstadosUsuario } from '../../usuarios/enums/estados-usuario.enum.js';
 import { ListReservaDto } from '../dtos/output/list-reserva.dto.js';
+import { ReservaCreadaDto } from '../dtos/output/reserva-creada.dto.js';
 
 const HORA_APERTURA = 8;
 const HORA_CIERRE = 16;
@@ -28,7 +29,7 @@ export class TurnosService {
   async crearReserva(
     dto: CreateReservaDto,
     usuario: { sub: number; rol: RolUsuario },
-  ): Promise<{ id: number }> {
+  ): Promise<ReservaCreadaDto> {
     const idPaciente =
       usuario.rol === RolUsuario.PACIENTE ? usuario.sub : dto.idPaciente;
 
@@ -75,7 +76,9 @@ export class TurnosService {
     });
     await this.repository.save(reserva);
 
-    return { id: reserva.id };
+    const reservaCreada = new ReservaCreadaDto();
+    reservaCreada.id = reserva.id;
+    return reservaCreada;
   }
 
   async listarReservas(

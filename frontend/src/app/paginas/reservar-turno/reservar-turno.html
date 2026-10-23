@@ -1,0 +1,71 @@
+<h1 class="pagina-titulo">Reservar turno</h1>
+<p class="pagina-subtitulo">Atendemos de 8 a 16 hs y cada turno dura una hora. Podés reservar con hasta 30 días de anticipación.</p>
+
+<form class="pagina-formulario" [formGroup]="form" (ngSubmit)="reservarTurno()">
+    @if (esAdministrador) {
+        <div class="formulario-campo">
+            <label for="idPaciente">Paciente</label>
+            <p-select
+                inputId="idPaciente"
+                formControlName="idPaciente"
+                placeholder="Elegí un paciente"
+                optionLabel="nombre"
+                optionValue="id"
+                [options]="pacientes()"
+                [filter]="true"
+                filterBy="nombre,documento"
+                [fluid]="true" />
+        </div>
+    }
+
+    <div class="formulario-campo">
+        <label for="idMedico">Médico</label>
+        <p-select
+            inputId="idMedico"
+            formControlName="idMedico"
+            placeholder="Elegí un médico"
+            optionLabel="nombre"
+            optionValue="id"
+            [options]="medicos()"
+            [fluid]="true" />
+
+        @if (obtenerMedicoSeleccionado(); as medicoSeleccionado) {
+            <small class="formulario-ayuda">
+                Valor de la consulta: {{ medicoSeleccionado.valorConsulta | currency: "ARS" : "symbol-narrow" : "1.0-0" }}.
+                Queda fijo al momento de reservar.
+            </small>
+        }
+    </div>
+
+    <div class="formulario-campo">
+        <label for="fecha">Fecha</label>
+        <p-datepicker
+            inputId="fecha"
+            formControlName="fecha"
+            dateFormat="dd/mm/yy"
+            placeholder="Elegí una fecha"
+            [showIcon]="true"
+            [minDate]="fechaMinima"
+            [maxDate]="fechaMaxima"
+            [fluid]="true" />
+    </div>
+
+    <div class="formulario-campo">
+        <label for="hora">Horario</label>
+        <p-select
+            inputId="hora"
+            formControlName="hora"
+            placeholder="Elegí un horario"
+            optionLabel="etiqueta"
+            optionValue="valor"
+            emptyMessage="Elegí una fecha con horarios disponibles"
+            [options]="opcionesDeHora()"
+            [fluid]="true" />
+    </div>
+
+    <p-button
+        type="submit"
+        label="Reservar turno"
+        icon="pi pi-calendar-plus"
+        [loading]="estaReservando()" />
+</form>
