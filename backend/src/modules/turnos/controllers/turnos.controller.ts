@@ -26,13 +26,13 @@ import { RolesGuard } from '../../auth/guards/roles.guard.js';
 import { Roles } from '../../auth/decorators/roles.decorator.js';
 import { RolUsuario } from '../../usuarios/enums/rol-usuario.enum.js';
 
-@ApiBearerAuth()
-@UseGuards(AuthGuard, RolesGuard)
 @Controller('turnos')
 export class TurnosController {
   constructor(private readonly service: TurnosService) {}
 
   @ApiOperation({ summary: 'Paciente y administrador - Reservar turno' })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
   @Roles(RolUsuario.PACIENTE, RolUsuario.ADMINISTRADOR)
   @Post()
   async crearReserva(
@@ -45,6 +45,8 @@ export class TurnosController {
   @ApiOperation({ summary: 'Todos los roles - Listar turnos' })
   @ApiOkResponse({ type: ListReservaDto, isArray: true })
   @ApiQuery({ name: 'fecha', required: false, example: '2026-10-05' })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
   @Get()
   async listarReservas(
     @Req() req: { usuario: { sub: number; rol: RolUsuario } },
@@ -54,6 +56,8 @@ export class TurnosController {
   }
 
   @ApiOperation({ summary: 'Paciente y administrador - Cancelar turno' })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
   @Roles(RolUsuario.PACIENTE, RolUsuario.ADMINISTRADOR)
   @Put(':id/cancelar')
   async cancelarReserva(
@@ -64,6 +68,8 @@ export class TurnosController {
   }
 
   @ApiOperation({ summary: 'Médico - Marcar turno como atendido' })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
   @Roles(RolUsuario.MEDICO)
   @Put(':id/atendido')
   async marcarAtendido(
@@ -74,6 +80,8 @@ export class TurnosController {
   }
 
   @ApiOperation({ summary: 'Médico - Marcar turno como ausente' })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
   @Roles(RolUsuario.MEDICO)
   @Put(':id/ausente')
   async marcarAusente(
@@ -84,6 +92,8 @@ export class TurnosController {
   }
 
   @ApiOperation({ summary: 'Administrador - Modificar valor de consulta' })
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard, RolesGuard)
   @Roles(RolUsuario.ADMINISTRADOR)
   @Put('valor-consulta/:idMedico')
   async actualizarValorConsulta(
