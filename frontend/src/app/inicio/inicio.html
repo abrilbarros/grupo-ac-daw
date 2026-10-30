@@ -1,0 +1,12 @@
+<h1 class="titulo">Bienvenido/a</h1>
+<p class="subtitulo">¿Qué querés hacer hoy?</p>
+
+<section class="opciones">
+    @for (opcion of opcionesDisponibles; track opcion.ruta) {
+        <a class="opcion" [routerLink]="'/' + opcion.ruta">
+            <i class="opcion-icono" [class]="opcion.icono"></i>
+            <h2 class="opcion-titulo">{{ opcion.titulo }}</h2>
+            <p class="opcion-descripcion">{{ opcion.descripcion }}</p>
+        </a>
+    }
+</section>
