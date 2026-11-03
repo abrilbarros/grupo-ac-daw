@@ -1,10 +1,12 @@
+CREATE EXTENSION IF NOT EXISTS pgcrypto;
+
 INSERT INTO usuarios (documento, apellidos, nombres, email, clave, estado, rol) VALUES
-('8000', 'Administradora', 'Prueba', 'administradora.prueba@clinica.test', '$2b$10$lpXUysGHZuyV7eL35XCSZuisbKXZ3MYBJvHtf/zJlmPiG8AG1Iasm', 'ACTIVO', 'ADMINISTRADOR'),
-('8100', 'Medico', 'Prueba Uno', 'medico.uno@clinica.test', '$2b$10$lpXUysGHZuyV7eL35XCSZuisbKXZ3MYBJvHtf/zJlmPiG8AG1Iasm', 'ACTIVO', 'MEDICO'),
-('8101', 'Medico', 'Prueba Dos', 'medico.dos@clinica.test', '$2b$10$lpXUysGHZuyV7eL35XCSZuisbKXZ3MYBJvHtf/zJlmPiG8AG1Iasm', 'ACTIVO', 'MEDICO'),
-('8200', 'Paciente', 'Prueba Uno', 'paciente.uno@clinica.test', '$2b$10$lpXUysGHZuyV7eL35XCSZuisbKXZ3MYBJvHtf/zJlmPiG8AG1Iasm', 'ACTIVO', 'PACIENTE'),
-('8201', 'Paciente', 'Prueba Dos', 'paciente.dos@clinica.test', '$2b$10$lpXUysGHZuyV7eL35XCSZuisbKXZ3MYBJvHtf/zJlmPiG8AG1Iasm', 'ACTIVO', 'PACIENTE'),
-('8202', 'Paciente', 'Prueba Tres', 'paciente.tres@clinica.test', '$2b$10$lpXUysGHZuyV7eL35XCSZuisbKXZ3MYBJvHtf/zJlmPiG8AG1Iasm', 'ACTIVO', 'PACIENTE')
+('8000', 'Administradora', 'Prueba', 'administradora.prueba@clinica.test', crypt('clinica123', gen_salt('bf', 10)), 'ACTIVO', 'ADMINISTRADOR'),
+('8100', 'Medico', 'Prueba Uno', 'medico.uno@clinica.test', crypt('clinica123', gen_salt('bf', 10)), 'ACTIVO', 'MEDICO'),
+('8101', 'Medico', 'Prueba Dos', 'medico.dos@clinica.test', crypt('clinica123', gen_salt('bf', 10)), 'ACTIVO', 'MEDICO'),
+('8200', 'Paciente', 'Prueba Uno', 'paciente.uno@clinica.test', crypt('clinica123', gen_salt('bf', 10)), 'ACTIVO', 'PACIENTE'),
+('8201', 'Paciente', 'Prueba Dos', 'paciente.dos@clinica.test', crypt('clinica123', gen_salt('bf', 10)), 'ACTIVO', 'PACIENTE'),
+('8202', 'Paciente', 'Prueba Tres', 'paciente.tres@clinica.test', crypt('clinica123', gen_salt('bf', 10)), 'ACTIVO', 'PACIENTE')
 ON CONFLICT (documento) DO NOTHING;
 
 INSERT INTO medicos (id_usuario, matricula, valor_consulta)
