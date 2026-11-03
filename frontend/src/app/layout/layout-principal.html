@@ -1,0 +1,17 @@
+<header class="encabezado">
+    <a class="encabezado-titulo" routerLink="/inicio">Clínica Vita</a>
+
+    <div class="encabezado-usuario">
+        <span class="encabezado-datos">Documento {{ documento }} · {{ etiquetaRol }}</span>
+        <p-button
+            label="Cerrar sesión"
+            icon="pi pi-sign-out"
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="cerrarSesion()" />
+    </div>
+</header>
+
+<main class="contenido">
+    <router-outlet />
+</main>

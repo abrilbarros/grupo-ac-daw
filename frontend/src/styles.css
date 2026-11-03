@@ -48,3 +48,58 @@ body {
     border-color: var(--color-primario-hover);
     color: var(--color-superficie);
 }
+
+.pagina-titulo {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.pagina-subtitulo {
+    margin: 0.25rem 0 1.5rem;
+    color: var(--color-texto-secundario);
+}
+
+.pagina-barra-herramientas {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.pagina-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pagina-nota {
+    margin-top: 1rem;
+    color: var(--color-texto-secundario);
+    font-size: 0.9rem;
+}
+
+.pagina-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    max-width: 480px;
+    padding: 1.5rem;
+    background-color: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: 12px;
+}
+
+.formulario-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.formulario-campo label {
+    font-weight: 600;
+}
+
+.formulario-ayuda {
+    color: var(--color-texto-secundario);
+}

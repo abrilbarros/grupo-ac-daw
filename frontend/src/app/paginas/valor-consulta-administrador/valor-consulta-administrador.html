@@ -1,0 +1,47 @@
+<h1 class="pagina-titulo">Valor de la consulta</h1>
+<p class="pagina-subtitulo">Modificá el valor de la consulta de cada médico.</p>
+
+<p-table [value]="filas()" [loading]="estaCargando()">
+    <ng-template #header>
+        <tr>
+            <th>Médico</th>
+            <th>Matrícula</th>
+            <th>Valor de la consulta</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+
+    <ng-template #body let-fila>
+        <tr>
+            <td>{{ fila.medico.nombre }}</td>
+            <td>{{ fila.medico.matricula }}</td>
+            <td>
+                <p-inputnumber
+                    mode="currency"
+                    currency="ARS"
+                    locale="es-AR"
+                    [min]="1"
+                    [minFractionDigits]="0"
+                    [maxFractionDigits]="0"
+                    [(ngModel)]="fila.valorEditado" />
+            </td>
+            <td>
+                <p-button
+                    label="Guardar"
+                    icon="pi pi-save"
+                    size="small"
+                    [loading]="fila.estaGuardando"
+                    [disabled]="!puedeGuardar(fila)"
+                    (onClick)="guardarValor(fila)" />
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+        <tr>
+            <td colspan="4">No hay médicos para mostrar.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p class="pagina-nota">El nuevo valor se aplica a las reservas futuras. Los turnos ya reservados conservan el valor con el que se reservaron.</p>

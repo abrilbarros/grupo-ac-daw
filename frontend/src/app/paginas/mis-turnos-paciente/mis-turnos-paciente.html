@@ -1,0 +1,47 @@
+<h1 class="pagina-titulo">Mis turnos</h1>
+<p class="pagina-subtitulo">Estos son los turnos que reservaste.</p>
+
+<p-table [value]="reservas()" [loading]="estaCargando()">
+    <ng-template #header>
+        <tr>
+            <th>Fecha y hora</th>
+            <th>Médico</th>
+            <th>Estado</th>
+            <th>Valor de la consulta</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+
+    <ng-template #body let-reserva>
+        <tr>
+            <td>{{ reserva.fechaHora | date: "dd/MM/yyyy HH:mm" }}</td>
+            <td>{{ reserva.medico }}</td>
+            <td>
+                <app-etiqueta-estado-reserva [estado]="reserva.estado" />
+            </td>
+            <td>{{ reserva.valorConsulta | currency: "ARS" : "symbol-narrow" : "1.0-0" }}</td>
+            <td>
+                @if (reserva.estado === estadoReserva.activo) {
+                    <p-button
+                        label="Cancelar"
+                        icon="pi pi-times"
+                        severity="danger"
+                        size="small"
+                        [outlined]="true"
+                        [disabled]="!puedeCancelar(reserva)"
+                        (onClick)="confirmarCancelacion(reserva)" />
+                }
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+        <tr>
+            <td colspan="5">Todavía no reservaste ningún turno.</td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p class="pagina-nota">Solo podés cancelar un turno hasta el día anterior a la consulta.</p>
+
+<p-confirmdialog />

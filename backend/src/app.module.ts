@@ -2,6 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { AuthModule } from './modules/auth/auth.module.js';
 import { TurnosModule } from './modules/turnos/turnos.module.js';
+import { MedicosModule } from './modules/medicos/medicos.module.js';
+import { PacientesModule } from './modules/pacientes/pacientes.module.js';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
@@ -19,7 +21,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     logger: 'advanced-console',
   }),
 
-    AuthModule, TurnosModule],
+    AuthModule, TurnosModule, MedicosModule, PacientesModule],
   controllers: [],
   providers: [],
   exports: [],

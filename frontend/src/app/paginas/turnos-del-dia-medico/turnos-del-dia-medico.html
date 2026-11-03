@@ -1,0 +1,59 @@
+<h1 class="pagina-titulo">Turnos del día</h1>
+<p class="pagina-subtitulo">Elegí una fecha para ver tus turnos reservados y marcar si el paciente fue atendido o estuvo ausente.</p>
+
+<div class="pagina-barra-herramientas">
+    <label for="fecha">Fecha</label>
+    <p-datepicker
+        inputId="fecha"
+        dateFormat="dd/mm/yy"
+        [showIcon]="true"
+        [ngModel]="fechaSeleccionada"
+        (ngModelChange)="cambiarFecha($event)" />
+</div>
+
+<p-table [value]="reservas()" [loading]="estaCargando()">
+    <ng-template #header>
+        <tr>
+            <th>Hora</th>
+            <th>Paciente</th>
+            <th>Estado</th>
+            <th>Valor de la consulta</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+
+    <ng-template #body let-reserva>
+        <tr>
+            <td>{{ reserva.fechaHora | date: "HH:mm" }}</td>
+            <td>{{ reserva.paciente }}</td>
+            <td>
+                <app-etiqueta-estado-reserva [estado]="reserva.estado" />
+            </td>
+            <td>{{ reserva.valorConsulta | currency: "ARS" : "symbol-narrow" : "1.0-0" }}</td>
+            <td>
+                @if (reserva.estado === estadoReserva.activo) {
+                    <div class="pagina-acciones">
+                        <p-button
+                            label="Atendido"
+                            icon="pi pi-check"
+                            severity="success"
+                            size="small"
+                            (onClick)="marcarComoAtendida(reserva)" />
+                        <p-button
+                            label="Ausente"
+                            icon="pi pi-times"
+                            severity="warn"
+                            size="small"
+                            (onClick)="marcarComoAusente(reserva)" />
+                    </div>
+                }
+            </td>
+        </tr>
+    </ng-template>
+
+    <ng-template #emptymessage>
+        <tr>
+            <td colspan="5">No tenés turnos reservados para esta fecha.</td>
+        </tr>
+    </ng-template>
+</p-table>
